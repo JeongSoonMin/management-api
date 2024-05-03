@@ -1,0 +1,30 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: settlement-management
+  profiles:
+    active: local
+  main:
+    banner-mode: off
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+  cloud:
+    aws:
+      credentials:
+        profile:
+          name: default
+      region:
+        static: ap-northeast-2
+management:
+  # actuator 설정
+  endpoints:
+    web:
+      exposure:
+        include: health
+      base-path: /management

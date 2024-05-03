@@ -1,0 +1,14 @@
+application:
+  mariadb:
+    master:
+      url: jdbc:mariadb://localhost:13306/base?characterEncoding=UTF-8&serverTimezone=UTC
+      username: base
+      password: base1234!@
+      driver-class-name: org.mariadb.jdbc.Driver
+    slave:
+      url: jdbc:mariadb://localhost:13307/base?characterEncoding=UTF-8&serverTimezone=UTC
+      username: base
+      password: base1234!@
+      driver-class-name: org.mariadb.jdbc.Driver
+
+
