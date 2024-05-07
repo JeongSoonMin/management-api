@@ -1,19 +1,20 @@
-package ai.fassto.management.persistence.master
+package ai.fassto.management.persistence.master.impl
 
 import ai.fassto.management.entity.QSample
 import ai.fassto.management.entity.Sample
+import ai.fassto.management.persistence.master.SampleMasterRepositoryCustom
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.beans.factory.annotation.Qualifier
 
-class SampleRepositoryCustomImpl(
+class SampleMasterRepositoryCustomImpl(
     @Qualifier("masterJpaQueryFactory") private val masterJPAQueryFactory: JPAQueryFactory
-): SampleRepositoryCustom {
+): SampleMasterRepositoryCustom {
     override fun findBySampleName(sampleName: String): List<Sample> {
-        var sample = QSample.sample;
+        val sample = QSample.sample;
         return masterJPAQueryFactory.select(sample)
             .from(sample)
             .where(
-                sample.sampleName.eq(sampleName)
+                sample.sampleName.contains(sampleName)
             ).fetch();
     }
 }
