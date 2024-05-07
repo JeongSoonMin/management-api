@@ -48,7 +48,7 @@ class MasterDatabaseConfig {
         return builder
             .dataSource(deviceDataSource)
             .packages("ai.fassto.management.entity")
-            .persistenceUnit("master")
+            .persistenceUnit("masterEntityManager")
             .build()
     }
 

@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 
 @Entity
 @Table(name = "sample")
-data class Sample(
+class Sample(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sample_id")

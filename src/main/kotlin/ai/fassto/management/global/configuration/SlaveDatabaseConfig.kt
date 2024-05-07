@@ -46,7 +46,7 @@ class SlaveDatabaseConfig {
         return builder
             .dataSource(slaveDataSource)
             .packages("ai.fassto.management.entity")
-            .persistenceUnit("slave")
+            .persistenceUnit("slaveEntityManager")
             .build()
     }
 
