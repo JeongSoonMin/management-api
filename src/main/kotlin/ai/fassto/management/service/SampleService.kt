@@ -1,26 +1,23 @@
 package ai.fassto.management.service
 
-import ai.fassto.management.annotation.MasterDBTransactional
-import ai.fassto.management.annotation.SlaveDBTransactional
 import ai.fassto.management.entity.Sample
-import ai.fassto.management.persistence.master.SampleMasterRepository
-import ai.fassto.management.persistence.slave.SampleSlaveRepository
+import ai.fassto.management.repository.SampleRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
-@SlaveDBTransactional
 class SampleService(
-    private val sampleMasterRepository: SampleMasterRepository,
-    private val sampleSlaveRepository: SampleSlaveRepository
+    private val sampleRepository: SampleRepository
 ) {
 
+    @Transactional(readOnly = true)
     fun findAll(): List<Sample> {
-        return sampleSlaveRepository.findAll().toList();
+        return sampleRepository.findAll().toList()
     }
 
 
-    @MasterDBTransactional
+    @Transactional
     fun save(sample: Sample): Sample {
-        return sampleMasterRepository.save(sample);
+        return sampleRepository.save(sample)
     }
 }

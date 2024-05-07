@@ -1,6 +1,8 @@
 package ai.fassto.management.entity
 
 import jakarta.persistence.*
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
 
 @Entity
@@ -15,8 +17,16 @@ class Sample(
     var sampleName: String? = null,
 
     @Column(name = "reg_time")
+    @CreationTimestamp
     var regTime: LocalDateTime? = null,
 
+    @Column(name = "reg_name")
+    var regName: String? = null,
+
     @Column(name = "upd_time")
-    var updTime: LocalDateTime? = null
+    @UpdateTimestamp
+    var updTime: LocalDateTime? = null,
+
+    @Column(name = "upd_name")
+    var updName: String? = null
 )

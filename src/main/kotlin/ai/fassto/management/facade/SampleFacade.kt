@@ -11,10 +11,10 @@ class SampleFacade(private val sampleService: SampleService) {
 
     @Transactional
     fun saveAndFindAll(): List<Sample> {
-        val sample = Sample(null, "asdf1", LocalDateTime.now(), LocalDateTime.now());
-        sampleService.save(sample);
-        Thread.sleep(1000);
+        val sample = Sample(null, "asdf1")
+        sampleService.save(sample)
+        Thread.sleep(1000)
 
-        return sampleService.findAll();
+        return sampleService.findAll()
     }
 }

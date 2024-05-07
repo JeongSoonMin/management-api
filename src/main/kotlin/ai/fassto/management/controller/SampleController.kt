@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RestController
 class SampleController(val sampleFacade: SampleFacade) {
     @GetMapping("")
     fun sampleList(): List<Sample> {
-        return sampleFacade.saveAndFindAll();
+        return sampleFacade.saveAndFindAll()
     }
 }
