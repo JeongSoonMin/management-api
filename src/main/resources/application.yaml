@@ -8,9 +8,13 @@ spring:
     active: local
   main:
     banner-mode: off
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  devtools:
+    add-properties: false
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         format_sql: true
@@ -18,7 +22,6 @@ spring:
         default_batch_fetch_size: 500
     open-in-view: false
     show-sql: true
-    database-platform: org.hibernate.dialect.MariaDBDialect
   cloud:
     aws:
       credentials:
@@ -33,3 +36,4 @@ management:
       exposure:
         include: health
       base-path: /management
+

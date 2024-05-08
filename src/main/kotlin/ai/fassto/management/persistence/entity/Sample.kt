@@ -10,6 +10,11 @@ import java.time.LocalDateTime
 @Entity
 @Table(name = "sample")
 class Sample(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "sample_id")
+    var sampleId: Long? = null,
+
     @Column(name = "sample_name")
     var sampleName: String,
 
@@ -29,14 +34,9 @@ class Sample(
     @LastModifiedBy
     var updName: String
 ) {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sample_id")
-    var sampleId: Long? = null
-
     companion object {
         fun create(sampleName: String, regName: String): Sample {
-            return Sample(sampleName, LocalDateTime.now(), regName, LocalDateTime.now(), regName)
+            return Sample(null, sampleName, LocalDateTime.now(), regName, LocalDateTime.now(), regName)
         }
     }
 }
