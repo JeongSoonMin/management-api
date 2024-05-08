@@ -1,10 +1,11 @@
 package ai.fassto.management.presentation.controller
 
-import ai.fassto.management.persistence.entity.Sample
-import ai.fassto.management.service.facade.SampleFacade
+import ai.fassto.management.global.enums.ErrorCode
+import ai.fassto.management.global.exception.BaseException
+import ai.fassto.management.global.response.CommonResponse
 import ai.fassto.management.service.SampleService
+import ai.fassto.management.service.facade.SampleFacade
 import org.springframework.web.bind.annotation.*
-import kotlin.jvm.optionals.getOrNull
 
 @RestController
 @RequestMapping("/sample")
@@ -14,18 +15,26 @@ class SampleController(
 ) {
 
     @GetMapping("")
-    fun sampleList(): List<Sample> {
-        return sampleService.findAll()
+    fun sampleList(): CommonResponse<Any> {
+        return CommonResponse.success(sampleService.findAll())
     }
 
     @GetMapping("/{sampleId}")
-    fun sample(@PathVariable sampleId: Long): Sample? {
-        val sample = sampleService.findById(sampleId)
-        return sample.getOrNull()
+    fun sample(@PathVariable sampleId: Long): CommonResponse<Any> {
+        return CommonResponse.success(
+            sampleService.findById(sampleId)
+                .orElseThrow { throw BaseException(ErrorCode.SAMPLE_NOT_FOUND) }
+        )
+    }
+
+    @GetMapping("/{sampleId}/fail")
+    fun sampleFail(@PathVariable sampleId: Long): CommonResponse<Any> {
+        return CommonResponse.success(sampleService.sampleException(sampleId))
     }
 
     @DeleteMapping("/{sampleId}")
-    fun sampleDelete(@PathVariable sampleId: Long) {
+    fun sampleDelete(@PathVariable sampleId: Long): CommonResponse<Nothing> {
         sampleService.delete(sampleId)
+        return CommonResponse.success()
     }
 }

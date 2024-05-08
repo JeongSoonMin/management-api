@@ -5,3 +5,11 @@ Content-Type: application/json
 ### sample get
 GET http://localhost:9001/sample/1234
 Content-Type: application/json
+
+### sample fail
+GET http://localhost:9001/sample/1234/fail
+Content-Type: application/json
+
+### 404 error
+GET http://localhost:9001/1234
+Content-Type: application/json
