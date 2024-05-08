@@ -1,9 +1,10 @@
-package ai.fassto.management.controller
+package ai.fassto.management.presentation.controller
 
-import ai.fassto.management.entity.Sample
-import ai.fassto.management.facade.SampleFacade
+import ai.fassto.management.persistence.entity.Sample
+import ai.fassto.management.service.facade.SampleFacade
 import ai.fassto.management.service.SampleService
 import org.springframework.web.bind.annotation.*
+import kotlin.jvm.optionals.getOrNull
 
 @RestController
 @RequestMapping("/sample")
@@ -14,16 +15,13 @@ class SampleController(
 
     @GetMapping("")
     fun sampleList(): List<Sample> {
-        return sampleFacade.saveAndFindAll()
+        return sampleService.findAll()
     }
 
     @GetMapping("/{sampleId}")
-    fun sample(@PathVariable sampleId: Long): Sample {
+    fun sample(@PathVariable sampleId: Long): Sample? {
         val sample = sampleService.findById(sampleId)
-        if(sample.isPresent) {
-            return sample.get()
-        }
-        return Sample()
+        return sample.getOrNull()
     }
 
     @DeleteMapping("/{sampleId}")

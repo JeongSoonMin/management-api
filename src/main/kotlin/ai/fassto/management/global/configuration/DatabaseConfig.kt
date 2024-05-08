@@ -25,7 +25,7 @@ import javax.sql.DataSource
 @EnableJpaRepositories(
     entityManagerFactoryRef = "entityManagerFactory",
     transactionManagerRef = "transactionManager",
-    basePackages = ["ai.fassto.management.repository"]
+    basePackages = ["ai.fassto.management.persistence.repository"]
 )
 class DatabaseConfig {
 
@@ -93,7 +93,7 @@ class DatabaseConfig {
     ): LocalContainerEntityManagerFactoryBean {
         return builder
             .dataSource(routingDataSource)
-            .packages("ai.fassto.management.entity")
+            .packages("ai.fassto.management.persistence.entity")
             .persistenceUnit("entityManager")
             .build()
     }

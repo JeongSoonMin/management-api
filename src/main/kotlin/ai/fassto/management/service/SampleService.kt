@@ -1,11 +1,10 @@
 package ai.fassto.management.service
 
-import ai.fassto.management.entity.Sample
-import ai.fassto.management.repository.SampleRepository
+import ai.fassto.management.persistence.entity.Sample
+import ai.fassto.management.persistence.repository.SampleRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
-import kotlin.jvm.optionals.getOrNull
 
 @Service
 @Transactional(readOnly = true)
