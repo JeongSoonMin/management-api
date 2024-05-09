@@ -12,4 +12,6 @@ enum class ErrorCode(
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, ErrorType.ERROR, "요청에 실패 하였습니다."),
 
     SAMPLE_NOT_FOUND(HttpStatus.UNPROCESSABLE_ENTITY, ErrorType.WARN, "Sample not found."),
+
+    NOT_SUPPORTED_UPLOAD_TYPE(HttpStatus.UNPROCESSABLE_ENTITY, ErrorType.WARN, "지원되지 않는 파일 업로드 유형입니다.")
 }

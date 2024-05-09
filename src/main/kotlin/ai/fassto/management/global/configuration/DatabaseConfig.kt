@@ -31,7 +31,7 @@ class DatabaseConfig {
 
     @Primary
     @Bean(name = ["masterDataSourceProperties"])
-    @ConfigurationProperties("application.mariadb.master")
+    @ConfigurationProperties("application.database.mariadb.master")
     fun masterDataSourceProperties(): DataSourceProperties {
         return DataSourceProperties()
     }
@@ -46,7 +46,7 @@ class DatabaseConfig {
     }
 
     @Bean(name = ["slaveDataSourceProperties"])
-    @ConfigurationProperties("application.mariadb.slave")
+    @ConfigurationProperties("application.database.mariadb.slave")
     fun slaveDataSourceProperties(): DataSourceProperties {
         return DataSourceProperties()
     }

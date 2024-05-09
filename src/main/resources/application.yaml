@@ -22,13 +22,6 @@ spring:
         default_batch_fetch_size: 500
     open-in-view: false
     show-sql: true
-  cloud:
-    aws:
-      credentials:
-        profile:
-          name: default
-      region:
-        static: ap-northeast-2
 management:
   # actuator 설정
   endpoints:
