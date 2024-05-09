@@ -1,9 +1,9 @@
 package ai.fassto.management.application.service.impl
 
+import ai.fassto.management.application.exception.FileManagementException
 import ai.fassto.management.application.service.FileManagementService
 import ai.fassto.management.global.configuration.properties.S3Properties
 import ai.fassto.management.global.enums.ErrorCode
-import ai.fassto.management.global.exception.BaseException
 import ai.fassto.management.global.util.RandomUtil
 import com.amazonaws.HttpMethod
 import com.amazonaws.services.s3.AmazonS3
@@ -13,7 +13,6 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.time.LocalDateTime
 import java.util.*
 
 @Slf4j
@@ -35,7 +34,7 @@ class FileManagementServiceImpl(
         }
 
         if (bucketName == null || uploadPath == null) {
-            throw BaseException(ErrorCode.NOT_SUPPORTED_UPLOAD_TYPE)
+            throw FileManagementException(ErrorCode.NOT_SUPPORTED_UPLOAD_TYPE)
         }
 
         /*

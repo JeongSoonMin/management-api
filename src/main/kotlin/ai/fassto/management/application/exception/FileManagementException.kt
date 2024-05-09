@@ -1,12 +1,10 @@
-package ai.fassto.management.global.exception
+package ai.fassto.management.application.exception
 
 import ai.fassto.management.global.enums.ErrorCode
+import ai.fassto.management.global.exception.BaseException
 
-open class BaseException : RuntimeException {
-    override val message: String?
-        get() = super.message
-    var data: Any? = null
-    open var errorCode: ErrorCode = ErrorCode.INTERNAL_SERVER_ERROR
+class FileManagementException : BaseException {
+    override var errorCode: ErrorCode = ErrorCode.FILE_MANAGEMENT_SERVER_ERROR
 
     constructor() : super()
 
