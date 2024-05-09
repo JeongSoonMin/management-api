@@ -24,7 +24,7 @@ class Sample(
 
     @Column(name = "reg_name")
     @CreatedBy
-    var regName: String,
+    var regName: String?,
 
     @Column(name = "upd_time")
     @LastModifiedDate
@@ -32,10 +32,10 @@ class Sample(
 
     @Column(name = "upd_name")
     @LastModifiedBy
-    var updName: String
+    var updName: String?
 ) {
     companion object {
-        fun create(sampleName: String, regName: String): Sample {
+        fun create(sampleName: String, regName: String?): Sample {
             return Sample(null, sampleName, LocalDateTime.now(), regName, LocalDateTime.now(), regName)
         }
     }

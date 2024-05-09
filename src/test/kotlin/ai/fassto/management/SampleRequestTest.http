@@ -3,7 +3,7 @@ GET http://localhost:9001/sample
 Content-Type: application/json
 
 ### sample get
-GET http://localhost:9001/sample/1234
+GET http://localhost:9001/sample/12
 Content-Type: application/json
 
 ### sample fail

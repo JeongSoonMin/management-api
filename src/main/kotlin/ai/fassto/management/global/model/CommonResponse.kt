@@ -1,9 +1,8 @@
-package ai.fassto.management.global.response
+package ai.fassto.management.global.model
 
 import ai.fassto.management.global.enums.ErrorCode
 import ai.fassto.management.global.enums.ErrorType
 import ai.fassto.management.global.enums.ResponseResult
-import java.util.*
 
 data class CommonResponse<T>(
     val result: ResponseResult,

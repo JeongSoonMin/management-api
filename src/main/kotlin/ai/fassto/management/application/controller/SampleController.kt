@@ -1,29 +1,25 @@
-package ai.fassto.management.presentation.controller
+package ai.fassto.management.application.controller
 
-import ai.fassto.management.global.enums.ErrorCode
-import ai.fassto.management.global.exception.BaseException
-import ai.fassto.management.global.response.CommonResponse
-import ai.fassto.management.service.SampleService
-import ai.fassto.management.service.facade.SampleFacade
+import ai.fassto.management.application.service.SampleService
+import ai.fassto.management.global.model.CommonResponse
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/sample")
 class SampleController(
-    val sampleFacade: SampleFacade,
     val sampleService: SampleService
 ) {
 
     @GetMapping("")
-    fun sampleList(): CommonResponse<Any> {
-        return CommonResponse.success(sampleService.findAll())
+    fun sampleList(@RequestParam("page", defaultValue = "0") page: Int, @RequestParam("size", defaultValue = "20") size: Int): CommonResponse<Any> {
+        return CommonResponse.success(sampleService.findAll(page, size))
     }
 
     @GetMapping("/{sampleId}")
     fun sample(@PathVariable sampleId: Long): CommonResponse<Any> {
         return CommonResponse.success(
             sampleService.findById(sampleId)
-                .orElseThrow { throw BaseException(ErrorCode.SAMPLE_NOT_FOUND) }
+            , "샘플 정보 조회 완료."
         )
     }
 

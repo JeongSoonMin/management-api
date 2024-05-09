@@ -2,7 +2,7 @@ package ai.fassto.management.global.exception
 
 import ai.fassto.management.global.enums.ErrorCode
 import ai.fassto.management.global.enums.ErrorType
-import ai.fassto.management.global.response.CommonResponse
+import ai.fassto.management.global.model.CommonResponse
 import lombok.extern.slf4j.Slf4j
 import org.apache.coyote.BadRequestException
 import org.slf4j.Logger
