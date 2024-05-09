@@ -32,13 +32,20 @@ class GlobalExceptionHandler {
         HttpRequestMethodNotSupportedException::class,
         MissingRequestHeaderException::class,
         HttpMessageNotReadableException::class,
-        TypeMismatchException::class,
-        MethodArgumentNotValidException::class
+        TypeMismatchException::class
     )
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleBadRequestException(e: Exception): CommonResponse<Nothing> {
         logger.warn("Bad Request Error : {}", e.message)
         return CommonResponse.fail(ErrorCode.BAD_REQUEST)
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException::class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): CommonResponse<Nothing> {
+        val message = e.bindingResult.allErrors.get(0).defaultMessage.toString()
+        logger.warn("Bad Request Valid Error : {}", message)
+        return CommonResponse.fail(message, ErrorCode.BAD_REQUEST)
     }
 
     @ExceptionHandler(NoResourceFoundException::class)

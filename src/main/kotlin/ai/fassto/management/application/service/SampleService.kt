@@ -8,6 +8,8 @@ interface SampleService {
 
     fun findById(sampleId: Long): SampleDto.SampleData?
 
+    fun create(sampleCreateRequest: SampleDto.SampleCreateRequest)
+
     fun save(sample: Sample)
 
     fun delete(sampleId: Long)

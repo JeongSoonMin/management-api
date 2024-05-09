@@ -24,6 +24,16 @@ data class CommonResponse<T>(
             return CommonResponse(ResponseResult.SUCCESS, data, message, null, null)
         }
 
+        fun fail(message: String, errorCode: ErrorCode): CommonResponse<Nothing> {
+            return CommonResponse(
+                ResponseResult.FAIL,
+                null,
+                message,
+                errorCode,
+                errorCode.errorType
+            )
+        }
+
         fun fail(errorCode: ErrorCode): CommonResponse<Nothing> {
             return CommonResponse(
                 ResponseResult.FAIL,

@@ -1,12 +1,18 @@
 package ai.fassto.management.application.model
 
 import ai.fassto.management.persistence.entity.Sample
+import jakarta.validation.constraints.NotEmpty
+import jakarta.validation.constraints.NotNull
 import org.springframework.data.domain.Page
 import java.time.LocalDateTime
 
 class SampleDto {
     data class SampleCreateRequest(
-        val sampleId: Long
+        @field:NotNull(message = "샘플명은 필수로 입력해주시기 바랍니다.")
+        val sampleName: String?,
+        @field:NotNull(message = "샘플 설명은 필수로 입력해주시기 바랍니다.")
+        val sampleDescription: String?,
+        val regName: String
     ) {}
 
     data class SampleListResponse(

@@ -1,7 +1,9 @@
 package ai.fassto.management.application.controller
 
+import ai.fassto.management.application.model.SampleDto
 import ai.fassto.management.application.service.SampleService
 import ai.fassto.management.global.model.CommonResponse
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -13,6 +15,12 @@ class SampleController(
     @GetMapping("")
     fun sampleList(@RequestParam("page", defaultValue = "0") page: Int, @RequestParam("size", defaultValue = "20") size: Int): CommonResponse<Any> {
         return CommonResponse.success(sampleService.findAll(page, size))
+    }
+
+    @PostMapping("")
+    fun sampleCreate(@RequestBody @Valid sampleRequest: SampleDto.SampleCreateRequest): CommonResponse<Nothing> {
+        sampleService.create(sampleRequest)
+        return CommonResponse.success()
     }
 
     @GetMapping("/{sampleId}")

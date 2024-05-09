@@ -6,6 +6,16 @@ Content-Type: application/json
 GET http://localhost:9001/sample/12
 Content-Type: application/json
 
+### sample create
+POST http://localhost:9001/sample
+Accept: application/json
+Content-Type: application/json
+
+{
+
+  "regName": "tester"
+}
+
 ### sample fail
 GET http://localhost:9001/sample/1234/fail
 Content-Type: application/json
@@ -15,5 +25,9 @@ GET http://localhost:9001/1234
 Content-Type: application/json
 
 ### get PreSignedUrl
-GET http://localhost:9001/files/pre-signed-url?fileName=1234.png&uploadType=event
+GET http://localhost:9001/files/pre-signed-url?fileName=1234.png&uploadType=event1
+Content-Type: application/json
+
+### get PreSignedUrl
+GET http://localhost:9001/files/pre-signed-url?fuploadType=event1
 Content-Type: application/json

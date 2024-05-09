@@ -34,6 +34,10 @@ class SampleServiceImpl(
             .orElseThrow { throw BaseException(ErrorCode.SAMPLE_NOT_FOUND) }
     }
 
+    override fun create(sampleCreateRequest: SampleDto.SampleCreateRequest) {
+        logger.info("create >>> {}", sampleCreateRequest)
+    }
+
     @Transactional
     override // readOnly 옵션이 없을 경우 master에서 등록/수정 및 조회
     fun save(sample: Sample) {
