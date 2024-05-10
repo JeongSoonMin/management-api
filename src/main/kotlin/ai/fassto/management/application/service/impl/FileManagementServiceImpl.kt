@@ -2,6 +2,7 @@ package ai.fassto.management.application.service.impl
 
 import ai.fassto.management.application.exception.FileManagementException
 import ai.fassto.management.application.service.FileManagementService
+import ai.fassto.management.global.configuration.common.log
 import ai.fassto.management.global.configuration.properties.S3Properties
 import ai.fassto.management.global.enums.ResponseCode
 import ai.fassto.management.global.util.RandomUtil
@@ -22,7 +23,7 @@ class FileManagementServiceImpl(
     val amazonS3Client: AmazonS3,
     val s3Properties: S3Properties
 ): FileManagementService {
-    val logger: Logger = LoggerFactory.getLogger(FileManagementService::class.java)
+    val log = this.log()
 
     override fun generatePreSignedUrl(uploadType: String, fileName: String): String? {
         var bucketName: String? = null
@@ -69,7 +70,7 @@ class FileManagementServiceImpl(
                 .withExpiration(expiration)
         )
 
-        logger.info("upload path >>> {}", url)
+        log.info("upload path >>> {}", url)
 
         return url.toString()
     }

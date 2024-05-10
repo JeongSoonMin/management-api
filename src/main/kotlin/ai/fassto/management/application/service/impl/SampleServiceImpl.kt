@@ -2,13 +2,12 @@ package ai.fassto.management.application.service.impl
 
 import ai.fassto.management.application.model.SampleDto
 import ai.fassto.management.application.service.SampleService
+import ai.fassto.management.global.configuration.common.log
 import ai.fassto.management.global.enums.ResponseCode
 import ai.fassto.management.global.exception.BaseException
 import ai.fassto.management.persistence.entity.Sample
 import ai.fassto.management.persistence.repository.SampleRepository
 import lombok.extern.slf4j.Slf4j
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
@@ -20,10 +19,10 @@ import org.springframework.transaction.annotation.Transactional
 class SampleServiceImpl(
     private val sampleRepository: SampleRepository
 ): SampleService {
-    val logger: Logger = LoggerFactory.getLogger(SampleService::class.java)
+    val log = this.log()
 
     override fun findAll(page: Int, size: Int): SampleDto.SampleListResponse {
-        logger.info("Sample List 조회");
+        log.info("Sample List 조회");
         val pageable = PageRequest.of(page, size, Sort.by("sampleId").descending())
         return SampleDto.SampleListResponse.of(sampleRepository.findAll(pageable).map { e -> SampleDto.SampleData.of(e) })
     }
@@ -36,7 +35,7 @@ class SampleServiceImpl(
 
     @Transactional
     override fun create(sampleCreateRequest: SampleDto.SampleCreateRequest) {
-        logger.info("create >>> {}", sampleCreateRequest)
+        log.info("create >>> {}", sampleCreateRequest)
         sampleRepository.save(sampleCreateRequest.toEntity())
     }
 

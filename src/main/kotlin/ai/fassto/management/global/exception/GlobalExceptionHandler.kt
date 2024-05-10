@@ -1,5 +1,6 @@
 package ai.fassto.management.global.exception
 
+import ai.fassto.management.global.configuration.common.log
 import ai.fassto.management.global.enums.ResponseCode
 import ai.fassto.management.global.enums.LogType
 import ai.fassto.management.global.model.CommonResponse
@@ -23,7 +24,7 @@ import org.springframework.web.servlet.resource.NoResourceFoundException
 @Slf4j
 @RestControllerAdvice
 class GlobalExceptionHandler {
-    val logger: Logger = LoggerFactory.getLogger(GlobalExceptionHandler::class.java)
+    val log = this.log()
 
     @ExceptionHandler(
         BadRequestException::class,
@@ -36,7 +37,7 @@ class GlobalExceptionHandler {
     )
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleBadRequestException(e: Exception): CommonResponse<Nothing> {
-        logger.warn("Bad Request Error : {}", e.message)
+        log.warn("Bad Request Error : {}", e.message)
         return CommonResponse.fail(ResponseCode.BAD_REQUEST)
     }
 
@@ -44,21 +45,21 @@ class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): CommonResponse<Nothing> {
         val message = e.bindingResult.allErrors.get(0).defaultMessage.toString()
-        logger.warn("Bad Request Valid Error : {}", message)
+        log.warn("Bad Request Valid Error : {}", message)
         return CommonResponse.fail(message, ResponseCode.BAD_REQUEST)
     }
 
     @ExceptionHandler(NoResourceFoundException::class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     fun handleNoResourceFoundException(e: Exception): CommonResponse<Nothing> {
-        logger.warn("Not Found Error : {}", e.message)
+        log.warn("Not Found Error : {}", e.message)
         return CommonResponse.fail(ResponseCode.NOT_FOUND)
     }
 
     @ExceptionHandler(Exception::class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     fun handleInternalServerException(e: Exception): CommonResponse<Nothing> {
-        logger.error("[UnknownException] {}", e.message, e)
+        log.error("[UnknownException] {}", e.message, e)
         return CommonResponse.fail(ResponseCode.INTERNAL_SERVER_ERROR)
     }
 
@@ -72,9 +73,9 @@ class GlobalExceptionHandler {
             message = e.responseCode.message
 
         if (LogType.WARN.equals(e.responseCode.logType))
-            logger.warn("[Exception] {}", message)
+            log.warn("[Exception] {}", message)
         else
-            logger.error("[Exception] {}", message, e)
+            log.error("[Exception] {}", message, e)
 
         return ResponseEntity<CommonResponse<Any>>(
             CommonResponse.fail(message, e.responseCode, e.data),
