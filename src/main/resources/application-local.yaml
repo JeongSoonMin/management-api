@@ -1,4 +1,5 @@
 application:
+  # DB 설정
   database:
     mariadb:
       master:
@@ -11,6 +12,11 @@ application:
         username: base
         password: base1234!@
         driver-class-name: org.mariadb.jdbc.Driver
+  # redis 설정
+  redis:
+    host: localhost
+    port: 6379
+  # AWS S3 설정
   aws:
     s3:
       cdn-bucket:

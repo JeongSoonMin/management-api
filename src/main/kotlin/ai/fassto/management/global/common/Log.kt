@@ -1,4 +1,4 @@
-package ai.fassto.management.global.configuration.common
+package ai.fassto.management.global.common
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

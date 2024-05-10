@@ -1,13 +1,11 @@
 package ai.fassto.management.global.exception
 
-import ai.fassto.management.global.configuration.common.log
-import ai.fassto.management.global.enums.ResponseCode
+import ai.fassto.management.global.common.log
 import ai.fassto.management.global.enums.LogType
+import ai.fassto.management.global.enums.ResponseCode
 import ai.fassto.management.global.model.CommonResponse
 import lombok.extern.slf4j.Slf4j
 import org.apache.coyote.BadRequestException
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.beans.TypeMismatchException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

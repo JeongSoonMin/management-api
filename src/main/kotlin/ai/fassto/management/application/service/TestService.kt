@@ -1,7 +1,9 @@
 package ai.fassto.management.application.service
 
-import ai.fassto.management.global.configuration.common.log
+import ai.fassto.management.application.model.SampleDto
+import ai.fassto.management.global.common.log
 import lombok.extern.slf4j.Slf4j
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 import java.util.concurrent.Executors
@@ -9,7 +11,9 @@ import java.util.concurrent.Executors
 
 @Slf4j
 @Service
-class TestService {
+class TestService(
+    val sampleService: SampleService,
+) {
     val log = this.log()
 
     @Async
@@ -46,5 +50,12 @@ class TestService {
                 executorService.submit(runnable)
             }
         }
+    }
+
+    @Cacheable(cacheManager = "testCacheManager", value = ["sample::list"])
+    fun findSampleListCache(): SampleDto.SampleListResponse {
+        val sampleList = sampleService.findAll(0, 20)
+        log.info("db 조회 완료")
+        return sampleList
     }
 }

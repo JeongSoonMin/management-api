@@ -29,4 +29,10 @@ class TestController(
         testService.virtualThreadTest()
         return CommonResponse.success()
     }
+
+    @Operation(summary = "cacheable 테스트")
+    @GetMapping("/cacheable")
+    fun cacheable(): CommonResponse<Any> {
+        return CommonResponse.success(testService.findSampleListCache())
+    }
 }

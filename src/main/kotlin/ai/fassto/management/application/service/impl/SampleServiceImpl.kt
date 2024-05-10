@@ -2,7 +2,7 @@ package ai.fassto.management.application.service.impl
 
 import ai.fassto.management.application.model.SampleDto
 import ai.fassto.management.application.service.SampleService
-import ai.fassto.management.global.configuration.common.log
+import ai.fassto.management.global.common.log
 import ai.fassto.management.global.enums.ResponseCode
 import ai.fassto.management.global.exception.BaseException
 import ai.fassto.management.persistence.entity.Sample

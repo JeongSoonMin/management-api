@@ -2,7 +2,7 @@ package ai.fassto.management.application.service.impl
 
 import ai.fassto.management.application.exception.FileManagementException
 import ai.fassto.management.application.service.FileManagementService
-import ai.fassto.management.global.configuration.common.log
+import ai.fassto.management.global.common.log
 import ai.fassto.management.global.configuration.properties.S3Properties
 import ai.fassto.management.global.enums.ResponseCode
 import ai.fassto.management.global.util.RandomUtil
@@ -37,19 +37,6 @@ class FileManagementServiceImpl(
         if (bucketName == null || uploadPath == null) {
             throw FileManagementException(ResponseCode.NOT_SUPPORTED_UPLOAD_TYPE)
         }
-
-        /*
-        TODO DB 등록 처리?
-        file_seq
-        upload_type
-        origin_file_name
-        file_ext
-        upload_file_name
-        upload_related_path
-        status
-        reg_time
-        reg_name
-         */
 
         return generatePreSignedUrl(bucketName, uploadPath, fileName)
     }

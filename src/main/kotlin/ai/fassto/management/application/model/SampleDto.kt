@@ -3,7 +3,6 @@ package ai.fassto.management.application.model
 import ai.fassto.management.global.exception.BaseException
 import ai.fassto.management.persistence.entity.Sample
 import io.swagger.v3.oas.annotations.media.Schema
-import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 import org.springframework.data.domain.Page
 import java.time.LocalDateTime
@@ -26,6 +25,7 @@ class SampleDto {
         }
     }
 
+    @Schema(description = "샘플 목록 조회 응답 DTO")
     data class SampleListResponse(
         @Schema(description = "샘플 목록")
         var content: List<SampleData>,
