@@ -1,15 +1,15 @@
 package ai.fassto.management.global.model
 
-import ai.fassto.management.global.enums.ErrorCode
-import ai.fassto.management.global.enums.ErrorType
+import ai.fassto.management.global.enums.ResponseCode
+import ai.fassto.management.global.enums.LogType
 import ai.fassto.management.global.enums.ResponseResult
 
 data class CommonResponse<T>(
     val result: ResponseResult,
     val data: T?,
     val message: String?,
-    val errorCode: ErrorCode?,
-    val errorType: ErrorType?
+    val responseCode: ResponseCode?,
+    val logType: LogType?
 ) {
     companion object {
         fun success(): CommonResponse<Nothing> {
@@ -24,43 +24,43 @@ data class CommonResponse<T>(
             return CommonResponse(ResponseResult.SUCCESS, data, message, null, null)
         }
 
-        fun fail(message: String, errorCode: ErrorCode): CommonResponse<Nothing> {
+        fun fail(message: String, responseCode: ResponseCode): CommonResponse<Nothing> {
             return CommonResponse(
                 ResponseResult.FAIL,
                 null,
                 message,
-                errorCode,
-                errorCode.errorType
+                responseCode,
+                responseCode.logType
             )
         }
 
-        fun fail(errorCode: ErrorCode): CommonResponse<Nothing> {
+        fun fail(responseCode: ResponseCode): CommonResponse<Nothing> {
             return CommonResponse(
                 ResponseResult.FAIL,
                 null,
-                errorCode.message,
-                errorCode,
-                errorCode.errorType
+                responseCode.message,
+                responseCode,
+                responseCode.logType
             )
         }
 
-        fun <T> fail(errorCode: ErrorCode, data: T?): CommonResponse<T> {
+        fun <T> fail(responseCode: ResponseCode, data: T?): CommonResponse<T> {
             return CommonResponse(
                 ResponseResult.FAIL,
                 data,
-                errorCode.message,
-                errorCode,
-                errorCode.errorType
+                responseCode.message,
+                responseCode,
+                responseCode.logType
             )
         }
 
-        fun <T> fail(message: String, errorCode: ErrorCode, data: T?): CommonResponse<T> {
+        fun <T> fail(message: String, responseCode: ResponseCode, data: T?): CommonResponse<T> {
             return CommonResponse(
                 ResponseResult.FAIL,
                 data,
                 message,
-                errorCode,
-                errorCode.errorType
+                responseCode,
+                responseCode.logType
             )
         }
 

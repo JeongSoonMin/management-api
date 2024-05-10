@@ -2,7 +2,7 @@ package ai.fassto.management.application.service.impl
 
 import ai.fassto.management.application.model.SampleDto
 import ai.fassto.management.application.service.SampleService
-import ai.fassto.management.global.enums.ErrorCode
+import ai.fassto.management.global.enums.ResponseCode
 import ai.fassto.management.global.exception.BaseException
 import ai.fassto.management.persistence.entity.Sample
 import ai.fassto.management.persistence.repository.SampleRepository
@@ -31,11 +31,13 @@ class SampleServiceImpl(
     override fun findById(sampleId: Long): SampleDto.SampleData? {
         return sampleRepository.findById(sampleId)
             .map { e -> SampleDto.SampleData.of(e) }
-            .orElseThrow { throw BaseException(ErrorCode.SAMPLE_NOT_FOUND) }
+            .orElseThrow { throw BaseException(ResponseCode.SAMPLE_NOT_FOUND) }
     }
 
+    @Transactional
     override fun create(sampleCreateRequest: SampleDto.SampleCreateRequest) {
         logger.info("create >>> {}", sampleCreateRequest)
+        sampleRepository.save(sampleCreateRequest.toEntity())
     }
 
     @Transactional
@@ -51,9 +53,9 @@ class SampleServiceImpl(
 
     override fun sampleException(sampleId: Long): Any {
 //        throw BaseException()
-//        throw BaseException("에러가 발생하였습니다.")
+        throw BaseException("에러가 발생하였습니다.")
 //        throw BaseException("에러 발생", this.findAll())
-        throw BaseException(ErrorCode.BAD_REQUEST)
+//        throw BaseException(ErrorCode.BAD_REQUEST)
 //        throw BaseException(ErrorCode.INTERNAL_SERVER_ERROR, this.findAll())
     }
 

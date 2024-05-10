@@ -3,7 +3,7 @@ package ai.fassto.management.application.service.impl
 import ai.fassto.management.application.exception.FileManagementException
 import ai.fassto.management.application.service.FileManagementService
 import ai.fassto.management.global.configuration.properties.S3Properties
-import ai.fassto.management.global.enums.ErrorCode
+import ai.fassto.management.global.enums.ResponseCode
 import ai.fassto.management.global.util.RandomUtil
 import com.amazonaws.HttpMethod
 import com.amazonaws.services.s3.AmazonS3
@@ -29,12 +29,12 @@ class FileManagementServiceImpl(
         var uploadPath: String? = null
 
         if (uploadType == "event") {
-            bucketName = s3Properties.cdnbucket.bucketName
-            uploadPath = s3Properties.cdnbucket.uploadPath.event
+            bucketName = s3Properties.cdnBucket.bucketName
+            uploadPath = s3Properties.cdnBucket.uploadPath.event
         }
 
         if (bucketName == null || uploadPath == null) {
-            throw FileManagementException(ErrorCode.NOT_SUPPORTED_UPLOAD_TYPE)
+            throw FileManagementException(ResponseCode.NOT_SUPPORTED_UPLOAD_TYPE)
         }
 
         /*

@@ -39,7 +39,7 @@ dependencies {
     implementation("io.micrometer:micrometer-tracing-bridge-brave:1.2.5")
 
     // Swagger
-//    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
 
     // QueryDSL 의존성 추가
     implementation("com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta")

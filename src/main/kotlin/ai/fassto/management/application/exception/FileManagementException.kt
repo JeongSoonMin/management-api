@@ -1,10 +1,10 @@
 package ai.fassto.management.application.exception
 
-import ai.fassto.management.global.enums.ErrorCode
+import ai.fassto.management.global.enums.ResponseCode
 import ai.fassto.management.global.exception.BaseException
 
 class FileManagementException : BaseException {
-    override var errorCode: ErrorCode = ErrorCode.FILE_MANAGEMENT_SERVER_ERROR
+    override var responseCode: ResponseCode = ResponseCode.FILE_MANAGEMENT_SERVER_ERROR
 
     constructor() : super()
 
@@ -14,12 +14,12 @@ class FileManagementException : BaseException {
         this.data = data
     }
 
-    constructor(errorCode: ErrorCode) : this(errorCode.message) {
-        this.errorCode = errorCode
+    constructor(responseCode: ResponseCode) : this(responseCode.message) {
+        this.responseCode = responseCode
     }
 
-    constructor(errorCode: ErrorCode, data: Any?) : this(errorCode.message) {
-        this.errorCode = errorCode
+    constructor(responseCode: ResponseCode, data: Any?) : this(responseCode.message) {
+        this.responseCode = responseCode
         this.data = data
     }
 }

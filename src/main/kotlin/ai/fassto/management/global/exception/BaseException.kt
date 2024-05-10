@@ -1,12 +1,12 @@
 package ai.fassto.management.global.exception
 
-import ai.fassto.management.global.enums.ErrorCode
+import ai.fassto.management.global.enums.ResponseCode
 
 open class BaseException : RuntimeException {
     override val message: String?
         get() = super.message
     var data: Any? = null
-    open var errorCode: ErrorCode = ErrorCode.UNPROCESSABLE_ENTITY
+    open var responseCode: ResponseCode = ResponseCode.UNPROCESSABLE_ENTITY
 
     constructor() : super()
 
@@ -16,16 +16,16 @@ open class BaseException : RuntimeException {
         this.data = data
     }
 
-    constructor(message: String?, data: Any?, errorCode: ErrorCode) : super(message){
+    constructor(message: String?, data: Any?, responseCode: ResponseCode) : super(message){
         this.data = data
     }
 
-    constructor(errorCode: ErrorCode) : super() {
-        this.errorCode = errorCode
+    constructor(responseCode: ResponseCode) : super() {
+        this.responseCode = responseCode
     }
 
-    constructor(errorCode: ErrorCode, data: Any?) : super() {
-        this.errorCode = errorCode
+    constructor(responseCode: ResponseCode, data: Any?) : super() {
+        this.responseCode = responseCode
         this.data = data
     }
 }

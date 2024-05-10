@@ -1,7 +1,7 @@
 package ai.fassto.management.global.exception
 
-import ai.fassto.management.global.enums.ErrorCode
-import ai.fassto.management.global.enums.ErrorType
+import ai.fassto.management.global.enums.ResponseCode
+import ai.fassto.management.global.enums.LogType
 import ai.fassto.management.global.model.CommonResponse
 import lombok.extern.slf4j.Slf4j
 import org.apache.coyote.BadRequestException
@@ -37,7 +37,7 @@ class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleBadRequestException(e: Exception): CommonResponse<Nothing> {
         logger.warn("Bad Request Error : {}", e.message)
-        return CommonResponse.fail(ErrorCode.BAD_REQUEST)
+        return CommonResponse.fail(ResponseCode.BAD_REQUEST)
     }
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
@@ -45,21 +45,21 @@ class GlobalExceptionHandler {
     fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): CommonResponse<Nothing> {
         val message = e.bindingResult.allErrors.get(0).defaultMessage.toString()
         logger.warn("Bad Request Valid Error : {}", message)
-        return CommonResponse.fail(message, ErrorCode.BAD_REQUEST)
+        return CommonResponse.fail(message, ResponseCode.BAD_REQUEST)
     }
 
     @ExceptionHandler(NoResourceFoundException::class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     fun handleNoResourceFoundException(e: Exception): CommonResponse<Nothing> {
         logger.warn("Not Found Error : {}", e.message)
-        return CommonResponse.fail(ErrorCode.NOT_FOUND)
+        return CommonResponse.fail(ResponseCode.NOT_FOUND)
     }
 
     @ExceptionHandler(Exception::class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     fun handleInternalServerException(e: Exception): CommonResponse<Nothing> {
         logger.error("[UnknownException] {}", e.message, e)
-        return CommonResponse.fail(ErrorCode.INTERNAL_SERVER_ERROR)
+        return CommonResponse.fail(ResponseCode.INTERNAL_SERVER_ERROR)
     }
 
     /**
@@ -69,16 +69,16 @@ class GlobalExceptionHandler {
     fun handleBusinessException(e: BaseException): ResponseEntity<CommonResponse<Any>> {
         var message: String = e.message.toString()
         if (message.isEmpty())
-            message = e.errorCode.message
+            message = e.responseCode.message
 
-        if (ErrorType.WARN.equals(e.errorCode.errorType))
+        if (LogType.WARN.equals(e.responseCode.logType))
             logger.warn("[Exception] {}", message)
         else
             logger.error("[Exception] {}", message, e)
 
         return ResponseEntity<CommonResponse<Any>>(
-            CommonResponse.fail(message, e.errorCode, e.data),
-            e.errorCode.status
+            CommonResponse.fail(message, e.responseCode, e.data),
+            e.responseCode.status
         )
     }
 }
