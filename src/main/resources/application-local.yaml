@@ -17,6 +17,11 @@ application:
         bucket-name: cdn.fassto.ai
         upload-path:
           event: event/
+spring:
+  # AWS secrets-manager 설정
+  config:
+    import:
+      - optional:aws-secretsmanager:dev/settlement-management
 
 
 

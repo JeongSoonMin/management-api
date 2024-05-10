@@ -25,7 +25,7 @@ GET http://localhost:9001/1234
 Content-Type: application/json
 
 ### get PreSignedUrl
-GET http://localhost:9001/files/pre-signed-url?fileName=1234.png&uploadType=event1
+GET http://localhost:9001/files/pre-signed-url?fileName=1234.png&uploadType=event
 Content-Type: application/json
 
 ### get PreSignedUrl

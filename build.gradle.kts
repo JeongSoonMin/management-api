@@ -52,6 +52,9 @@ dependencies {
 
     // AWS SDK
     implementation("com.amazonaws:aws-java-sdk-s3:1.12.716")
+    implementation("io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:3.1.1")
+
+
 
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
