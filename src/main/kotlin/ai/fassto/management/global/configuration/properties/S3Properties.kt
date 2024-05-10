@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 @ConfigurationProperties("application.aws.s3")
 class S3Properties {
-    lateinit var cdnbucket: S3BucketProperties
+    lateinit var cdnBucket: S3BucketProperties
 }
 
 class S3BucketProperties {

@@ -13,7 +13,7 @@ application:
         driver-class-name: org.mariadb.jdbc.Driver
   aws:
     s3:
-      cdnbucket:
+      cdn-bucket:
         bucket-name: cdn.fassto.ai
         upload-path:
           event: event/
