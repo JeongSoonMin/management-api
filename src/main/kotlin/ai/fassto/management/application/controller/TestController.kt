@@ -19,6 +19,13 @@ class TestController(
     @Operation(summary = "가상 Thread Test")
     @GetMapping("/virtual-thread-test")
     fun virtualThreadTest(): CommonResponse<Nothing> {
+        testService.virtualThreadAsyncTest()
+        return CommonResponse.success()
+    }
+
+    @Operation(summary = "가상 Thread Test2")
+    @GetMapping("/virtual-thread-test-2")
+    fun virtualThreadTest2(): CommonResponse<Nothing> {
         testService.virtualThreadTest()
         return CommonResponse.success()
     }
