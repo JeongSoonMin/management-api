@@ -52,6 +52,8 @@ dependencies {
     kapt("jakarta.persistence:jakarta.persistence-api")
 
     // AWS SDK
+    implementation(platform("io.awspring.cloud:spring-cloud-aws-dependencies:3.1.1"))
+    implementation("io.awspring.cloud:spring-cloud-aws-starter-sqs:3.1.1")
     implementation("com.amazonaws:aws-java-sdk-s3:1.12.716")
     implementation("io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:3.1.1")
 
