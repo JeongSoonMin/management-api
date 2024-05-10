@@ -67,13 +67,17 @@ class GlobalExceptionHandler {
      */
     @ExceptionHandler(BaseException::class)
     fun handleBusinessException(e: BaseException): ResponseEntity<CommonResponse<Any>> {
+        var message: String = e.message.toString()
+        if (message.isEmpty())
+            message = e.errorCode.message
+
         if (ErrorType.WARN.equals(e.errorCode.errorType))
-            logger.warn("[Exception] {}", e.message, e)
+            logger.warn("[Exception] {}", message)
         else
-            logger.error("[Exception] {}", e.message, e)
+            logger.error("[Exception] {}", message, e)
 
         return ResponseEntity<CommonResponse<Any>>(
-            CommonResponse.fail(e.errorCode, e.data),
+            CommonResponse.fail(message, e.errorCode, e.data),
             e.errorCode.status
         )
     }
