@@ -13,6 +13,7 @@ plugins {
 group = "ai.fassto"
 version = "0.0.1-SNAPSHOT"
 val queryDslVersion = "5.0.0"
+val awsSpringCloudVersion = "3.1.1"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -52,10 +53,10 @@ dependencies {
     kapt("jakarta.persistence:jakarta.persistence-api")
 
     // AWS SDK
-    implementation(platform("io.awspring.cloud:spring-cloud-aws-dependencies:3.1.1"))
-    implementation("io.awspring.cloud:spring-cloud-aws-starter-sqs:3.1.1")
-    implementation("com.amazonaws:aws-java-sdk-s3:1.12.716")
-    implementation("io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:3.1.1")
+    implementation(platform("io.awspring.cloud:spring-cloud-aws-dependencies:${awsSpringCloudVersion}"))
+    implementation("io.awspring.cloud:spring-cloud-aws-starter-sqs:${awsSpringCloudVersion}")
+    implementation("io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:${awsSpringCloudVersion}")
+    implementation("com.amazonaws:aws-java-sdk-s3:1.12.716") // s3의 경우 io.awspring.cloud 에선 23년 이후 버전업이 되지 않아, aws 라이브러리 사용.
 
 
 
