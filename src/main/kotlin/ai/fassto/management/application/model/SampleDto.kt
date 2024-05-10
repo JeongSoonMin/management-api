@@ -1,7 +1,7 @@
 package ai.fassto.management.application.model
 
 import ai.fassto.management.global.exception.BaseException
-import ai.fassto.management.persistence.entity.Sample
+import ai.fassto.management.persistence.rdb.entity.Sample
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotNull
 import org.springframework.data.domain.Page

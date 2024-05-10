@@ -1,7 +1,7 @@
 package ai.fassto.management.application.service
 
 import ai.fassto.management.application.model.SampleDto
-import ai.fassto.management.persistence.entity.Sample
+import ai.fassto.management.persistence.rdb.entity.Sample
 
 interface SampleService {
     fun findAll(page: Int, size: Int): SampleDto.SampleListResponse

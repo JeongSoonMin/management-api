@@ -1,8 +1,8 @@
-package ai.fassto.management.persistence.repository.impl
+package ai.fassto.management.persistence.rdb.repository.impl
 
-import ai.fassto.management.persistence.entity.QSample.sample
-import ai.fassto.management.persistence.entity.Sample
-import ai.fassto.management.persistence.repository.SampleRepositoryCustom
+import ai.fassto.management.persistence.rdb.entity.QSample.sample
+import ai.fassto.management.persistence.rdb.entity.Sample
+import ai.fassto.management.persistence.rdb.repository.SampleRepositoryCustom
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Repository
 

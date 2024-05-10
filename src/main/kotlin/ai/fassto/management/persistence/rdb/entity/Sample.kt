@@ -1,4 +1,4 @@
-package ai.fassto.management.persistence.entity
+package ai.fassto.management.persistence.rdb.entity
 
 import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedBy

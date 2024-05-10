@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Primary
+import org.springframework.context.annotation.*
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource
@@ -25,7 +23,7 @@ import javax.sql.DataSource
 @EnableJpaRepositories(
     entityManagerFactoryRef = "entityManagerFactory",
     transactionManagerRef = "transactionManager",
-    basePackages = ["ai.fassto.management.persistence.repository"]
+    basePackages = ["ai.fassto.management.persistence.rdb.repository"]
 )
 class DatabaseConfig {
 
@@ -93,7 +91,7 @@ class DatabaseConfig {
     ): LocalContainerEntityManagerFactoryBean {
         return builder
             .dataSource(routingDataSource)
-            .packages("ai.fassto.management.persistence.entity")
+            .packages("ai.fassto.management.persistence.rdb.entity")
             .persistenceUnit("entityManager")
             .build()
     }

@@ -5,8 +5,8 @@ import ai.fassto.management.application.service.SampleService
 import ai.fassto.management.global.common.log
 import ai.fassto.management.global.enums.ResponseCode
 import ai.fassto.management.global.exception.BaseException
-import ai.fassto.management.persistence.entity.Sample
-import ai.fassto.management.persistence.repository.SampleRepository
+import ai.fassto.management.persistence.rdb.entity.Sample
+import ai.fassto.management.persistence.rdb.repository.SampleRepository
 import lombok.extern.slf4j.Slf4j
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
