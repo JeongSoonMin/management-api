@@ -6,7 +6,6 @@ import io.swagger.v3.oas.models.info.Info
 import io.swagger.v3.oas.models.security.SecurityRequirement
 import io.swagger.v3.oas.models.servers.Server
 import io.swagger.v3.oas.models.tags.Tag
-import lombok.Getter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import java.util.*
@@ -49,12 +48,14 @@ class SwaggerConfig {
         return Arrays.asList(
             Tag().name(SwaggerTags.COMMON).description("공통 기능"),
             Tag().name(SwaggerTags.SAMPLE).description("샘플"),
+            Tag().name(SwaggerTags.TEST).description("테스트"),
         )
     }
 
     object SwaggerTags {
         const val COMMON = "COMMON"
         const val SAMPLE = "SAMPLE"
+        const val TEST = "TEST"
     }
 
 }

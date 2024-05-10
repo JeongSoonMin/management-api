@@ -9,7 +9,7 @@ data class CommonResponse<T>(
     val data: T?,
     val message: String?,
     val responseCode: ResponseCode?,
-    val logType: LogType?
+    val responseLevel: LogType?
 ) {
     companion object {
         fun success(): CommonResponse<Nothing> {
