@@ -1,4 +1,4 @@
-Meessage-api Application
+Settlement Management Application
 ==================================
 
 ## 개발 구성
