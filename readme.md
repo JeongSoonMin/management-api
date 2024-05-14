@@ -1,4 +1,4 @@
-Settlement Management Application
+Management Application
 ==================================
 
 ## 개발 구성

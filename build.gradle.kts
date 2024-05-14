@@ -10,7 +10,7 @@ plugins {
     kotlin("kapt") version "1.9.23"
 }
 
-group = "ai.fassto"
+group = "com.jesomi"
 version = "0.0.1-SNAPSHOT"
 val queryDslVersion = "5.0.0"
 val awsSpringCloudVersion = "3.1.1"
@@ -60,12 +60,10 @@ dependencies {
 
 
 
-    compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-    annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
