@@ -14,7 +14,7 @@ plugins {
 group = "com.jesomi"
 version = "0.0.1-SNAPSHOT"
 val queryDslVersion = "5.1.0"
-val awsSpringCloudVersion = "3.1.1"
+val awsSpringCloudVersion = "3.2.0-M1"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -57,7 +57,7 @@ dependencies {
     implementation(platform("io.awspring.cloud:spring-cloud-aws-dependencies:${awsSpringCloudVersion}"))
     implementation("io.awspring.cloud:spring-cloud-aws-starter-sqs:${awsSpringCloudVersion}")
     implementation("io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:${awsSpringCloudVersion}")
-    implementation("com.amazonaws:aws-java-sdk-s3:1.12.716") // s3의 경우 io.awspring.cloud 에선 23년 이후 버전업이 되지 않아, aws 라이브러리 사용.
+    implementation("com.amazonaws:aws-java-sdk-s3:1.12.718") // s3의 경우 io.awspring.cloud 에선 23년 이후 버전업이 되지 않아, aws 라이브러리 사용.
 
 
 
