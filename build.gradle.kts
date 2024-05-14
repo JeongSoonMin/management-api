@@ -4,6 +4,7 @@ plugins {
     id("org.springframework.boot") version "3.2.5"
     id("io.spring.dependency-management") version "1.1.4"
     id("org.graalvm.buildtools.native") version "0.9.28"
+    id("com.google.cloud.tools.jib") version "3.4.0"
     kotlin("jvm") version "1.9.23"
     kotlin("plugin.spring") version "1.9.23"
     kotlin("plugin.jpa") version "1.9.23"
@@ -12,7 +13,7 @@ plugins {
 
 group = "com.jesomi"
 version = "0.0.1-SNAPSHOT"
-val queryDslVersion = "5.0.0"
+val queryDslVersion = "5.1.0"
 val awsSpringCloudVersion = "3.1.1"
 
 java {
@@ -103,4 +104,21 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+jib {
+    container {
+        creationTime = "USE_CURRENT_TIMESTAMP"
+        mainClass = "ai.fassto.management.SettlementManagementApplication"
+    }
+
+    from {
+        image = "ghcr.io/graalvm/jdk-community:21"
+        platforms {
+            platform {
+                architecture = "amd64"
+                os = "linux"
+            }
+        }
+    }
 }
