@@ -109,7 +109,7 @@ tasks.withType<Test> {
 jib {
     container {
         creationTime = "USE_CURRENT_TIMESTAMP"
-        mainClass = "ai.fassto.management.SettlementManagementApplication"
+        mainClass = "com.jesomi.management.ManagementApplication"
     }
 
     from {
