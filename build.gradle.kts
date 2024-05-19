@@ -42,7 +42,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     // log tracing
-    implementation("io.micrometer:micrometer-tracing-bridge-brave:1.2.5")
+    implementation("io.micrometer:micrometer-tracing-bridge-brave:1.3.0")
 
     // Swagger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
@@ -57,7 +57,7 @@ dependencies {
     implementation(platform("io.awspring.cloud:spring-cloud-aws-dependencies:${awsSpringCloudVersion}"))
     implementation("io.awspring.cloud:spring-cloud-aws-starter-sqs:${awsSpringCloudVersion}")
     implementation("io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:${awsSpringCloudVersion}")
-    implementation("com.amazonaws:aws-java-sdk-s3:1.12.718") // s3의 경우 io.awspring.cloud 에선 23년 이후 버전업이 되지 않아, aws 라이브러리 사용.
+    implementation("com.amazonaws:aws-java-sdk-s3:1.12.724") // s3의 경우 io.awspring.cloud 에선 23년 이후 버전업이 되지 않아, aws 라이브러리 사용.
 
 
 

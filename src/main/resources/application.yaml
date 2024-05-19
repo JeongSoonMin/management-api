@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: settlement-management
+    name: management
   profiles:
     active: local
   main:
