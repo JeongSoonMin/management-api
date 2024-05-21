@@ -9,6 +9,7 @@ plugins {
     kotlin("plugin.spring") version "1.9.23"
     kotlin("plugin.jpa") version "1.9.23"
     kotlin("kapt") version "1.9.23"
+    kotlin("plugin.allopen") version "1.9.24"
 }
 
 group = "com.jesomi"
@@ -95,6 +96,12 @@ kapt {
 }
 // Querydsl 설정부 추가 - end
 
+allOpen {
+    annotation("javax.persistence.Entity")
+    annotation("javax.persistence.MappedSuperclass")
+    annotation("javax.persistence.Embeddable")
+}
+
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs += "-Xjsr305=strict"
@@ -109,7 +116,7 @@ tasks.withType<Test> {
 jib {
     container {
         creationTime = "USE_CURRENT_TIMESTAMP"
-        mainClass = "com.jesomi.management.ManagementApplication"
+        mainClass = "com.jesomi.management.ManagementApplicationKt"
     }
 
     from {

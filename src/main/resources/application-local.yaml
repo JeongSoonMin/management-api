@@ -28,6 +28,9 @@ application:
   redis:
     host: localhost
     port: 16379
+#    redis:
+#      host: ${REDIS_HOST}
+#      port: ${REDIS_PORT}
   # AWS S3 설정
   aws:
     s3:
@@ -37,11 +40,11 @@ application:
           event: event/
     sqs:
       test-queue: test
-spring:
+#spring:
   # AWS secrets-manager 설정
 #  config:
 #    import:
-#      - optional:aws-secretsmanager:dev/settlement-management
+#      - optional:aws-secretsmanager:dev/management
 
 
 

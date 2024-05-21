@@ -31,6 +31,15 @@ management:
   endpoints:
     web:
       exposure:
-        include: health
-      base-path: /management
+        include: health, info
+  endpoint:
+    health:
+      enabled: true
+      probes:
+        enabled: true
+  health:
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true
 
