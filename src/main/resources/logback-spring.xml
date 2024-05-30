@@ -5,7 +5,9 @@
   <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
 
   <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %clr(%5level) %cyan(%logger) - %msg%n" />
-  <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5level %logger - %msg [traceID=%X{traceId:-} span_id=%X{spanId:-} trace_flags=%X{traceFlags:-}]%n" />
+  <property name="OTEL_CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %clr(%5level) %cyan(%logger) - %msg [traceID=%mdc{trace_id} span_id=%mdc{span_id} trace_flags=%mdc{trace_flags}]%n" />
+  <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5level %logger - %msg [traceID=%X{traceId:-} span_id=%X{spanId:-}]%n" />
+  <property name="OTEL_FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5level %logger - %msg [traceID=%mdc{trace_id} span_id=%mdc{span_id} trace_flags=%mdc{trace_flags}]%n" />
 
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
