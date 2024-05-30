@@ -12,13 +12,13 @@ class CacheDto {
         val originFileNameYn: String
     ) {
         companion object {
-            fun of(cmsFileManage: FileManage): FileManageCache {
+            fun of(fileManage: FileManage): FileManageCache {
                 return FileManageCache(
-                    cmsFileManage.fileManageCd,
-                    cmsFileManage.domainName,
-                    cmsFileManage.bucketName,
-                    cmsFileManage.uploadPath,
-                    cmsFileManage.originFileNameYn
+                    fileManage.fileManageCd,
+                    fileManage.domainName,
+                    fileManage.bucketName,
+                    fileManage.uploadPath,
+                    fileManage.originFileNameYn
                 )
             }
         }

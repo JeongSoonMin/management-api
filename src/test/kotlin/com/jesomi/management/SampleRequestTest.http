@@ -1,13 +1,13 @@
 ### sample list
-GET http://localhost:9001/sample
+GET {{host}}/sample
 Content-Type: application/json
 
 ### sample get
-GET http://localhost:9001/sample/12
+GET {{host}}/sample/12
 Content-Type: application/json
 
 ### sample create
-POST http://localhost:9001/sample
+POST {{host}}/sample
 Accept: application/json
 Content-Type: application/json
 
@@ -17,17 +17,27 @@ Content-Type: application/json
 }
 
 ### sample fail
-GET http://localhost:9001/sample/1234/fail
+GET {{host}}/sample/1234/fail
 Content-Type: application/json
 
 ### 404 error
-GET http://localhost:9001/1234
+GET {{host}}/1234
 Content-Type: application/json
 
 ### get PreSignedUrl
-GET http://localhost:9001/files/pre-signed-url?fileName=1234.png&uploadType=event
+GET {{host}}{{filesPath}}/pre-signed-url/EVENT?fileName=12345.png&reqId=f12c5d9e-e112-11ee-9fa6-0a29d499fce4
 Content-Type: application/json
 
-### get PreSignedUrl
-GET http://localhost:9001/files/pre-signed-url?fuploadType=event1
+### get fileUploadList
+GET {{host}}{{filesPath}}/upload/EVENT
 Content-Type: application/json
+
+### fileUpload 업로드 완료
+POST {{host}}{{filesPath}}/upload/EVENT
+Content-Type: application/json
+Accept: application/json
+
+{
+  "uploadId": "a2287236-1e99-4c12-bf67-3252b202bee4",
+  "reqId": "f12c5d9e-e112-11ee-9fa6-0a29d499fce4"
+}

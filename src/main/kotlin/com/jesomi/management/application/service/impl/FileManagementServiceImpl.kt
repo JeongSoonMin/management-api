@@ -116,7 +116,7 @@ class FileManagementServiceImpl(
         val fileUploadPrepare = fileUploadPrepareRepository.findById(uploadId)
             .orElseThrow { throw FileManagementException(ResponseCode.FILE_UPLOAD_PREPARED_NOT_FOUND) }
 
-        val fileUpload = fileUploadPrepare.toCmsFileUploadEntity()
+        val fileUpload = fileUploadPrepare.toFileUploadEntity()
 
         // DB 저장
         fileUploadRepository.save(fileUpload)

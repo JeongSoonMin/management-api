@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.4"
     id("org.graalvm.buildtools.native") version "0.9.28"
     id("com.google.cloud.tools.jib") version "3.4.0"
+    id("jacoco")
     kotlin("jvm") version "1.9.23"
     kotlin("plugin.spring") version "1.9.23"
     kotlin("plugin.jpa") version "1.9.23"
@@ -19,6 +20,10 @@ val awsSpringCloudVersion = "3.2.0-M1"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
+}
+
+jacoco {
+    toolVersion = "0.8.12"
 }
 
 configurations {
@@ -44,6 +49,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     // log tracing
     implementation("io.micrometer:micrometer-tracing-bridge-brave:1.3.0")
+    // implementation("io.opentelemetry.instrumentation:opentelemetry-logback-mdc-1.0:1.24.0-alpha") otel 쓸 경우
 
     // Swagger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
@@ -59,8 +65,6 @@ dependencies {
     implementation("io.awspring.cloud:spring-cloud-aws-starter-sqs:${awsSpringCloudVersion}")
     implementation("io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:${awsSpringCloudVersion}")
     implementation("com.amazonaws:aws-java-sdk-s3:1.12.724") // s3의 경우 io.awspring.cloud 에선 23년 이후 버전업이 되지 않아, aws 라이브러리 사용.
-
-
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
@@ -96,11 +100,50 @@ kapt {
 }
 // Querydsl 설정부 추가 - end
 
+// entity allOpen
 allOpen {
     annotation("javax.persistence.Entity")
     annotation("javax.persistence.MappedSuperclass")
     annotation("javax.persistence.Embeddable")
 }
+
+// jacoco
+tasks.jacocoTestReport {
+    reports {
+        xml.required = false
+        csv.required = false
+        html.required = true
+    }
+    // dependsOn : 이 작업에 지정된 종속성을 추가
+    dependsOn("test") // jacocoTestReport 에 test라는 종속성을 추가
+    finalizedBy("jacocoTestCoverageVerification")
+}
+
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            enabled = true;
+            element = "CLASS"
+
+            limit {
+                counter = "METHOD"
+                value = "COVEREDRATIO"
+                minimum = "0.0".toBigDecimal()
+            }
+
+            classDirectories.setFrom(
+                files(classDirectories.files.map {
+                    fileTree(it) {
+                        include(
+                            "ai/fassto/management/**",
+                        )
+                    }
+                })
+            )
+        }
+    }
+}
+
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
@@ -111,6 +154,7 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    finalizedBy("jacocoTestReport")
 }
 
 jib {
