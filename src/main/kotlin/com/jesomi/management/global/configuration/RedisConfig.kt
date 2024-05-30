@@ -1,9 +1,11 @@
 package com.jesomi.management.global.configuration
 
+import com.jesomi.management.persistence.redis.constants.RedisConst
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import com.jesomi.management.global.constants.AmazonConst
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.cache.CacheManager
 import org.springframework.cache.annotation.EnableCaching
@@ -54,13 +56,13 @@ class RedisConfig {
     @Bean("defaultCacheManager")
     fun defaultCacheManager(): CacheManager {
         val configuration = RedisCacheConfiguration.defaultCacheConfig()
-            .computePrefixWith { cacheName -> "management::$cacheName" }
+            .computePrefixWith { cacheName -> "management::$cacheName:" }
             .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(StringRedisSerializer()))
             .serializeValuesWith(
                 RedisSerializationContext.SerializationPair.fromSerializer(
                     GenericJackson2JsonRedisSerializer(getObjectMapper())
                 )) // Serialize 관련 설정
-            .entryTtl(Duration.ofMinutes(2)) // 캐시 기본 ttl 2분 설정
+            .entryTtl(Duration.ofMinutes(RedisConst.DEFAULT_CACHE_MANAGER_TTL)) // 캐시 기본 ttl 60분 설정
             .disableCachingNullValues() // Null 캐싱 제외
         return RedisCacheManager.RedisCacheManagerBuilder
             .fromConnectionFactory(lettuceConnectionFactory())
@@ -71,7 +73,7 @@ class RedisConfig {
     @Bean("testCacheManager")
     fun testCacheManager(): CacheManager {
         val configuration = RedisCacheConfiguration.defaultCacheConfig()
-            .computePrefixWith { cacheName -> "test::$cacheName" }
+            .computePrefixWith { cacheName -> "test::$cacheName:" }
             .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(StringRedisSerializer()))
             .serializeValuesWith(
                 RedisSerializationContext.SerializationPair.fromSerializer(
@@ -97,8 +99,8 @@ class RedisConfig {
             ObjectMapper.DefaultTyping.EVERYTHING,
             objectMapper.polymorphicTypeValidator
         )
-        defaultTypeResolver = defaultTypeResolver.init(JsonTypeInfo.Id.CLASS, null)
-        defaultTypeResolver = defaultTypeResolver.inclusion(JsonTypeInfo.As.PROPERTY)
+            .init(JsonTypeInfo.Id.CLASS, null)
+            .inclusion(JsonTypeInfo.As.PROPERTY)
         objectMapper.setDefaultTyping(defaultTypeResolver)
 
         return objectMapper

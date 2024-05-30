@@ -68,7 +68,7 @@ class GlobalExceptionHandler {
         if (message.isEmpty())
             message = e.responseCode.message
 
-        if (LogType.WARN.equals(e.responseCode.logType))
+        if (LogType.WARN == e.responseCode.logType)
             log.warn("[Exception] {}", message)
         else
             log.error("[Exception] {}", message, e)

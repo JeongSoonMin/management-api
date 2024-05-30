@@ -10,18 +10,24 @@ spring:
     banner-mode: off
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
-  devtools:
-    add-properties: false
   jpa:
+    database: mysql
+    open-in-view: false
     hibernate:
       ddl-auto: validate
     properties:
       hibernate:
-        format_sql: true
+        show-sql: true
+        format-sql: true
         use_sql_comments: true
-        default_batch_fetch_size: 500
-    open-in-view: false
     show-sql: true
+  # devtools
+  devtools:
+    add-properties: false
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
   # 가상 스레드 설정
   threads:
     virtual:

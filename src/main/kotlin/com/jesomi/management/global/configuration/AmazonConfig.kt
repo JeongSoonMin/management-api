@@ -16,7 +16,7 @@ import java.time.Duration
 import java.time.temporal.ChronoUnit
 
 @Configuration
-class AWSConfig {
+class AmazonConfig {
 
     @Bean
     fun amazonS3Client(): AmazonS3 {
