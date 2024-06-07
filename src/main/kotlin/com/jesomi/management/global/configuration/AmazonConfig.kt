@@ -1,8 +1,5 @@
 package com.jesomi.management.global.configuration
 
-import com.amazonaws.regions.Regions
-import com.amazonaws.services.s3.AmazonS3
-import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import io.awspring.cloud.autoconfigure.sqs.SqsProperties
 import io.awspring.cloud.sqs.config.SqsMessageListenerContainerFactory
 import io.awspring.cloud.sqs.listener.ListenerMode
@@ -11,6 +8,9 @@ import io.awspring.cloud.sqs.listener.SqsContainerOptionsBuilder
 import io.awspring.cloud.sqs.listener.acknowledgement.handler.AcknowledgementMode
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import software.amazon.awssdk.services.s3.S3AsyncClient
+import software.amazon.awssdk.services.s3.internal.crt.S3CrtAsyncClient
+import software.amazon.awssdk.services.s3.presigner.S3Presigner
 import software.amazon.awssdk.services.sqs.SqsAsyncClient
 import java.time.Duration
 import java.time.temporal.ChronoUnit
@@ -19,9 +19,14 @@ import java.time.temporal.ChronoUnit
 class AmazonConfig {
 
     @Bean
-    fun amazonS3Client(): AmazonS3 {
-        return AmazonS3ClientBuilder.standard()
-            .withRegion(Regions.AP_NORTHEAST_2)
+    fun amazonS3Client(): S3AsyncClient {
+        return S3CrtAsyncClient.builder()
+            .build()
+    }
+
+    @Bean
+    fun amazonS3PreSigner(): S3Presigner {
+        return S3Presigner.builder()
             .build()
     }
 

@@ -54,12 +54,12 @@ application:
   database:
     mariadb:
       master:
-        url: jdbc:mariadb://${DB_MASTER_HOST}:${DB_MASTER_PORT}/${DB_MASTER_DATABASE}?useUnicode=true&characterEncoding=utf8mb4&autoReconnect=true&allowMultiQueries=true
+        jdbc-url: jdbc:mariadb://${DB_MASTER_HOST}:${DB_MASTER_PORT}/${DB_MASTER_DATABASE}?useUnicode=true&characterEncoding=utf8mb4&autoReconnect=true&allowMultiQueries=true
         username: ${DB_MASTER_USERNAME}
         password: ${DB_MASTER_PASSWORD}
         driver-class-name: org.mariadb.jdbc.Driver
       slave:
-        url: jdbc:mariadb://${DB_SLAVE_HOST}:${DB_SLAVE_PORT}/${DB_SLAVE_DATABASE}?useUnicode=true&characterEncoding=utf8mb4&autoReconnect=true&allowMultiQueries=true
+        jdbc-url: jdbc:mariadb://${DB_SLAVE_HOST}:${DB_SLAVE_PORT}/${DB_SLAVE_DATABASE}?useUnicode=true&characterEncoding=utf8mb4&autoReconnect=true&allowMultiQueries=true
         username: ${DB_SLAVE_USERNAME}
         password: ${DB_SLAVE_PASSWORD}
         driver-class-name: org.mariadb.jdbc.Driver

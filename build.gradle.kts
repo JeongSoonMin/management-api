@@ -64,7 +64,8 @@ dependencies {
     implementation(platform("io.awspring.cloud:spring-cloud-aws-dependencies:${awsSpringCloudVersion}"))
     implementation("io.awspring.cloud:spring-cloud-aws-starter-sqs:${awsSpringCloudVersion}")
     implementation("io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:${awsSpringCloudVersion}")
-    implementation("com.amazonaws:aws-java-sdk-s3:1.12.724") // s3의 경우 io.awspring.cloud 에선 23년 이후 버전업이 되지 않아, aws 라이브러리 사용.
+    implementation("software.amazon.awssdk.crt:aws-crt:0.29.19")
+    implementation("software.amazon.awssdk:s3:2.25.65")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
