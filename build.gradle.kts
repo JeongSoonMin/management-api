@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.2.5"
+    id("org.springframework.boot") version "3.3.0"
     id("io.spring.dependency-management") version "1.1.4"
     id("org.graalvm.buildtools.native") version "0.9.28"
     id("com.google.cloud.tools.jib") version "3.4.0"
@@ -54,7 +54,7 @@ dependencies {
     // Swagger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
 
-    // QueryDSL 의존성 추가
+    // QueryDSL
     implementation("com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta")
     kapt("com.querydsl:querydsl-apt:${queryDslVersion}:jakarta")
     kapt("jakarta.annotation:jakarta.annotation-api")
@@ -115,15 +115,14 @@ tasks.jacocoTestReport {
         csv.required = false
         html.required = true
     }
-    // dependsOn : 이 작업에 지정된 종속성을 추가
-    dependsOn("test") // jacocoTestReport 에 test라는 종속성을 추가
+    dependsOn("test")
     finalizedBy("jacocoTestCoverageVerification")
 }
 
 tasks.jacocoTestCoverageVerification {
     violationRules {
         rule {
-            enabled = true;
+            enabled = true
             element = "CLASS"
 
             limit {
