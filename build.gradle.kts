@@ -48,7 +48,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     // log tracing
-    implementation("io.micrometer:micrometer-tracing-bridge-brave:1.3.0")
+    implementation("io.micrometer:micrometer-tracing-bridge-brave:1.3.1")
     // implementation("io.opentelemetry.instrumentation:opentelemetry-logback-mdc-1.0:1.24.0-alpha") otel 쓸 경우
 
     // Swagger
@@ -64,7 +64,7 @@ dependencies {
     implementation(platform("io.awspring.cloud:spring-cloud-aws-dependencies:${awsSpringCloudVersion}"))
     implementation("io.awspring.cloud:spring-cloud-aws-starter-sqs:${awsSpringCloudVersion}")
     implementation("io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:${awsSpringCloudVersion}")
-    implementation("software.amazon.awssdk.crt:aws-crt:0.29.19")
+    implementation("software.amazon.awssdk.crt:aws-crt:0.29.22")
     implementation("software.amazon.awssdk:s3:2.25.65")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -135,7 +135,7 @@ tasks.jacocoTestCoverageVerification {
                 files(classDirectories.files.map {
                     fileTree(it) {
                         include(
-                            "ai/fassto/management/**",
+                            "com/jesomi/management/**",
                         )
                     }
                 })
