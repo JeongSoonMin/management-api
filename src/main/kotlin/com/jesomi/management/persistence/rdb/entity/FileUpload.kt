@@ -1,5 +1,6 @@
 package com.jesomi.management.persistence.rdb.entity
 
+import com.jesomi.management.application.model.FileDto
 import com.jesomi.management.persistence.rdb.enums.FileUploadStatus
 import jakarta.persistence.*
 import java.util.function.Supplier
@@ -37,6 +38,10 @@ class FileUpload(
     var uploadStatus: FileUploadStatus = FileUploadStatus.C
         protected set
 
+    @Column(name = "remark")
+    var remark: String? = null
+        protected set
+
     @Column(name = "upd_id")
     var updId: String? = this.regId
         protected set
@@ -53,5 +58,10 @@ class FileUpload(
     fun isDeletedThrow(exceptionSupplier: Supplier<Throwable>): FileUpload {
         if (isDeleted()) throw exceptionSupplier.get()
         else return this
+    }
+
+    fun modify(request: FileDto.FileUploadModifyRequest, reqId: String) {
+        this.remark = request.remark
+        this.updId = reqId
     }
 }

@@ -19,6 +19,11 @@ interface FileManagementService {
     fun completeFileUpload(uploadId: String, reqId: String): FileDto.FileUploadCompleteResponse
 
     /**
+     * 파일 업로드 정보 수정
+     */
+    fun modifyFileUpload(fileSeq: Long, fileUploadModifyRequest: FileDto.FileUploadModifyRequest, reqId: String)
+
+    /**
      * 파일 업로드 삭제 처리
      * 물리 파일 삭제 및 DB 삭제
      */

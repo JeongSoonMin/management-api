@@ -18,10 +18,7 @@ class FileDto {
     data class FileUploadCompleteRequest(
         @Schema(description = "업로드 ID")
         @field:NotNull(message = "업로드 ID가 누락 되었습니다.")
-        val uploadId: String?,
-        @Schema(description = "요청자 ID")
-        @field:NotNull(message = "요청자 ID가 누락 되었습니다.")
-        val reqId: String?
+        val uploadId: String
     )
 
     data class FileUploadCompleteResponse(
@@ -29,6 +26,12 @@ class FileDto {
         val fileManageCd: String?,
         @Schema(description = "파일 일련번호")
         val fileSeq: Long?
+    )
+
+    data class FileUploadModifyRequest(
+        @Schema(description = "비고")
+        @field:NotNull(message = "비고가 누락 되었습니다.")
+        val remark: String
     )
 
     data class FileUploadListResponse(

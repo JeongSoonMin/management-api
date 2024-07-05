@@ -22,7 +22,7 @@ class FileManagementController(
     fun preSignedUrl(
         @Schema(description = "파일 관리 코드(EVENT or xxx)") @PathVariable fileManageCd: String,
         @Schema(description = "업로드 파일 명") @RequestParam fileName: String,
-        @Schema(description = "요청자 ID") @RequestParam reqId: String
+        @Schema(description = "요청자 ID") @RequestHeader("userId") reqId: String
     ): CommonResponse<FileDto.FilePreSignedResponse> {
         return CommonResponse.success(
             fileManagementService.generatePreSignedUrl(
@@ -49,13 +49,24 @@ class FileManagementController(
     @PostMapping("/upload/{fileManageCd}")
     fun completeFileUpload(
         @Schema(description = "파일 관리 코드") @PathVariable fileManageCd: String,
-        @RequestBody @Valid request: FileDto.FileUploadCompleteRequest
+        @RequestBody @Valid request: FileDto.FileUploadCompleteRequest,
+        @Schema(description = "요청자 ID") @RequestHeader("userId") reqId: String
     ): CommonResponse<FileDto.FileUploadCompleteResponse> {
-        val uploadId: String = request.uploadId.toString()
-        val reqId: String = request.reqId.toString()
         return CommonResponse.success(
-            fileManagementService.completeFileUpload(uploadId, reqId)
+            fileManagementService.completeFileUpload(request.uploadId, reqId)
         )
+    }
+
+    @Operation(summary = "파일 업로드 정보 수정")
+    @PutMapping("/upload/{fileManageCd}/{fileSeq}")
+    fun modifyFileUpload(
+        @Schema(description = "파일 관리 코드") @PathVariable fileManageCd: String,
+        @Schema(description = "파일 일련번호") @PathVariable fileSeq: Long,
+        @RequestBody @Valid request: FileDto.FileUploadModifyRequest,
+        @Schema(description = "요청자 ID") @RequestHeader("userId") reqId: String
+    ): CommonResponse<Nothing> {
+        fileManagementService.modifyFileUpload(fileSeq, request, reqId)
+        return CommonResponse.success()
     }
 
     @Operation(summary = "파일 업로드 삭제")
@@ -63,7 +74,7 @@ class FileManagementController(
     fun deleteFileUpload(
         @Schema(description = "파일 관리 코드") @PathVariable fileManageCd: String,
         @Schema(description = "파일 일련번호") @PathVariable fileSeq: Long,
-        @Schema(description = "요청자 ID") @RequestParam reqId: String
+        @Schema(description = "요청자 ID") @RequestHeader("userId") reqId: String
     ): CommonResponse<Nothing> {
         fileManagementService.deleteFileUpload(fileSeq, reqId)
         return CommonResponse.success()

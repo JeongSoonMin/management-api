@@ -10,6 +10,7 @@ import com.jesomi.management.application.service.FileManagementService
 import com.jesomi.management.global.common.log
 import com.jesomi.management.global.enums.ResponseCode
 import com.jesomi.management.global.util.RandomUtil
+import com.jesomi.management.persistence.rdb.entity.FileUpload
 import com.jesomi.management.persistence.rdb.repository.FileUploadRepository
 import com.jesomi.management.persistence.redis.entity.FileUploadPrepare
 import com.jesomi.management.persistence.redis.repository.FileUploadPrepareRepository
@@ -124,6 +125,21 @@ class FileManagementServiceImpl(
         fileUploadPrepareRepository.delete(fileUploadPrepare)
 
         return FileDto.FileUploadCompleteResponse(fileUpload.fileManageCd, fileUpload.fileSeq)
+    }
+
+    /**
+     * 파일 업로드 정보 수정
+     */
+    @Transactional
+    override fun modifyFileUpload(
+        fileSeq: Long,
+        fileUploadModifyRequest: FileDto.FileUploadModifyRequest,
+        reqId: String
+    ) {
+        val fileUpload: FileUpload = fileUploadRepository.findById(fileSeq)
+            .orElseThrow { throw FileManagementException(ResponseCode.FILE_UPLOAD_NOT_FOUND) }
+
+        fileUpload.modify(fileUploadModifyRequest, reqId)
     }
 
     /**
