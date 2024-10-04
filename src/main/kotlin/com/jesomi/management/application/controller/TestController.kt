@@ -35,4 +35,10 @@ class TestController(
     fun cacheable(): CommonResponse<Any> {
         return CommonResponse.success(testService.findSampleListCache())
     }
+
+    @Operation(summary = "kafka produce 테스트")
+    @GetMapping("/kafka-produce")
+    fun kafkaProduce(): CommonResponse<Any> {
+        return CommonResponse.success(testService.kafkaProduce())
+    }
 }

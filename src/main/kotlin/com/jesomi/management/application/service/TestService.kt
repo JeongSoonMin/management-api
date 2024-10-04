@@ -11,6 +11,7 @@ import java.util.concurrent.Executors
 @Service
 class TestService(
     val sampleService: SampleService,
+    val kafkaService: KafkaService
 ) {
     val log = this.log()
 
@@ -55,5 +56,10 @@ class TestService(
         val sampleList = sampleService.findAll(0, 20)
         log.info("db 조회 완료")
         return sampleList
+    }
+
+    fun kafkaProduce() {
+        log.info("kafkaProduce")
+        kafkaService.send("management.test.sample", "test중입니다.");
     }
 }

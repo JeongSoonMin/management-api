@@ -63,6 +63,9 @@ application:
         username: ${DB_SLAVE_USERNAME}
         password: ${DB_SLAVE_PASSWORD}
         driver-class-name: org.mariadb.jdbc.Driver
+  # Kafka 설정
+  kafka:
+    bootstrap-servers: localhost:9092
   # redis 설정
   redis:
     host: ${REDIS_HOST}

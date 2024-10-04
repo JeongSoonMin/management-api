@@ -47,6 +47,7 @@ $ aws configure list
   * DB_SLAVE_PASSWORD=xxxx
   * REDIS_HOST=localhost
   * REDIS_PORT=6379
+  * KAFKA_BOOTSTRAP_SERVERS=localhost:9092
 
 ## 개발 사항
 * 가상 스레드 적용(http request 및 async 적용)
@@ -58,6 +59,7 @@ $ aws configure list
 * DB 정보 AWS SecretsManager 사용
 * 파일 업로드 AWS S3 PreSignedUrl 요청 처리
 * AWS SQS 메시지 put/listen 처리
+* Kafka OR AWS MSK(IAM 인증 기반) 메시지 send/listen 처리
 * Redis cache 적용
   * cacheable
   * redisTemplate
